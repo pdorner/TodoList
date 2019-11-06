@@ -1,0 +1,20 @@
+<form class="form-inline">
+        <input name="searchInput" class="form-control"  placeholder="Search" #searchInput="ngModel"  [(ngModel)]="searchText" style="width: 80%;">
+        <button class="btn btn-outline-primary"  (click)="searchText=''">x</button>
+</form>
+<table class="table table-sm">
+        <thead>
+                <th>todo</th>
+                
+        </thead>
+        <ng-container *ngFor="let todoList of todoArray">
+                <tr class="table-dark" *ngIf ="filterCondition(todoList)">
+                        <td>{{todoList.todoObject}}</td>
+                        
+                        <td>
+			<button class="btn btn-info" (click)="todoService.populateForm(todoList)">Edit</button>
+                        <button class="btn btn-danger" (click)="onDelete(todoList.$key1)" >Delete</button>                        </td>
+                </tr>
+        </ng-container>
+</table>
+<div class="alert alert-danger" *ngIf="showDeletedMessage" >Deleted successfully</div>
